@@ -37,27 +37,37 @@ onde exibe as informações do usuário e um botão sair*/
         integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <title>Login</title>
 </head>
+<style>
+    .error {
+        color: #990000;
+        font-weight: 700;
+        display: none;
+    }
+</style>
 
 <body class="bg-light">
     <section class="container d-flex justify-content-center align-items-center" style="height: 100vh;">
         <div class="card" style="width: 80%;">
             <div class="card-body">
-                <form action="" method="POST">
+                <form id="loginForm" action="" method="POST">
                     <div class="form-group">
                         <div class="form-floating mb-3">
                             <input type="text" class="form-control" id="username" name="username" placeholder="">
                             <label for="username">Qual seu nome?</label>
+                            <span class="error errUserName">Por favor, digite seu nome!</span>
                         </div>
                         <div class="form-floating mb-3">
                             <input type="email" class="form-control" id="usermail" name="usermail" placeholder="">
-                            <label for="username">Qual se email?</label>
+                            <label for="username">Qual seu email?</label>
+                            <span class="error errUserMail">Por favor, digite seu email!</span>
                         </div>
-                        <button type="submit" class="btn btn-success">Enviar</button>
+                        <button type="submit" class="btn btn-success">Login</button>
                     </div>
                 </form>
             </div>
         </div>
     </section>
+    <script src="scripts.js"></script>
 </body>
 
 </html>
