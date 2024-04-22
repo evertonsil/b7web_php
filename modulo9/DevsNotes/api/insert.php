@@ -7,8 +7,8 @@ $method = strtolower($_SERVER['REQUEST_METHOD']);
 if ($method === 'post') {
 
     //capturando o title e body da nota através do POST
-    $title = filter_input(INPUT_POST, 'title');
-    $body = filter_input(INPUT_POST, 'body');
+    $title = filter_input(INPUT_POST, 'noteTitle');
+    $body = filter_input(INPUT_POST, 'noteBody');
 
     if ($title && $body) {
         //preprarando query sql para inserir, após validação do preenchimento dos campos
