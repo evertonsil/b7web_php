@@ -1,0 +1,8 @@
+body{
+    background-color: #1a0033;
+    color: #f1f1f1;
+}
+
+.modal-title, label.form-label{
+    color: #474747;
+}
