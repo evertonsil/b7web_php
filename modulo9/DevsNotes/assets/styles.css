@@ -6,3 +6,10 @@ body{
 .modal-title, label.form-label{
     color: #474747;
 }
+
+.task-text{
+    color: #474747;
+    text-align: center;
+    font-weight: 500;
+    font-size: 16px;
+}

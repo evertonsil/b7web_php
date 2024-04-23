@@ -24,18 +24,22 @@ $notes = getAllNotes();
                         </form>
                         <ul class="list-group" id="todo-list">
                             <!--traz as notas da API-->
-                            <?php if ($notes['result'] !== null): ?>
+                            <?php if (!empty($notes['result'])): ?>
                                 <?php foreach ($notes['result'] as $item): ?>
                                     <li class="list-group-item d-flex justify-content-between align-items-center">
                                         <span class="task-text"><?php echo $item['title']; ?></span>
-                                        <input type="text" class="form-control edit-input" style="display: none;"
-                                            value="<?php echo $item['id']; ?>">
+                                        <input type="text" class="form-control edit-input" style="display: none;">
                                         <div class="btn-group">
-                                            <button class="btn btn-danger btn-sm delete-btn">✕</button>
+                                            <button type="button" class="btn btn-danger btn-sm delete-btn"
+                                                data-bs-toggle="modal" data-bs-target="#deleteNoteModal"
+                                                value="<?php echo $item['id']; ?>"
+                                                onclick="openModalDelete(this.value)">✕</button>
                                             <button class="btn btn-success btn-sm edit-btn">✎</button>
                                         </div>
                                     </li>
                                 <?php endforeach; ?>
+                            <?php else: ?>
+                                <span class="task-text">Nenhuma nota encontrada!</span>
                             <?php endif; ?>
                         </ul>
                     </div>
@@ -47,7 +51,6 @@ $notes = getAllNotes();
         <div class="modal fade" id="insertNoteModal" tabindex="-1" aria-labelledby="exampleModalLabel"
             aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered">
-
                 <div class="modal-content">
                     <div class="modal-header">
                         <h1 class="modal-title fs-5" id="exampleModalLabel">Adicionar nova nota</h1>
@@ -64,15 +67,32 @@ $notes = getAllNotes();
                         </div>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cacelar</button>
-                        <button type="submit" class="btn btn-primary">Cadastrar</button>
+                        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cancelar</button>
+                        <button type="submit" class="btn btn-success">Cadastrar</button>
                     </div>
                 </div>
-
             </div>
         </div>
     </form>
-
+    <!--Modal confirmação de exclusão-->
+    <input id="hdnNoteId" type="hidden" value="" name="hdnNoteId">
+    <div class="modal fade" id="deleteNoteModal" tabindex="-1" aria-labelledby="deleteNoteModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="deleteNoteModalLabel">Você tem certeza que deseja excluir a
+                        nota?
+                    </h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Não</button>
+                    <button type="submit" id="btnConfirmDeleteNote" class="btn btn-success">Sim</button>
+                </div>
+            </div>
+        </div>
+    </div>
     <?php
     //envia requisição para API, retornando todas as notas
     function getAllNotes()
