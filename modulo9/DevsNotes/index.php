@@ -67,8 +67,8 @@ $notes = getAllNotes();
                         </div>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cancelar</button>
                         <button type="submit" class="btn btn-success">Cadastrar</button>
+                        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cancelar</button>
                     </div>
                 </div>
             </div>
@@ -87,8 +87,8 @@ $notes = getAllNotes();
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Não</button>
                     <button type="submit" id="btnConfirmDeleteNote" class="btn btn-success">Sim</button>
+                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Não</button>
                 </div>
             </div>
         </div>
