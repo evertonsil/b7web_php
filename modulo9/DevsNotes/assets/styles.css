@@ -13,3 +13,8 @@ body{
     font-weight: 500;
     font-size: 16px;
 }
+
+.errorEdit{
+    color: #b80000;
+    font-weight: 600;
+}

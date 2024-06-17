@@ -22,7 +22,7 @@ if ($method === 'get') {
                 'body' => $result['body']
             ];
         } else {
-            $array['error'] = 'Nenhuma nota econtrada!';
+            $array['error'] = 'Nenhuma nota econtrada com este ID!';
         }
 
     } else {

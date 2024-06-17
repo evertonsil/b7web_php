@@ -1,7 +1,10 @@
-<?php require 'header.php';
+<?php
+require 'header.php';
+require 'classes/notes.php';
 
 //Chamando função para puxar todas as notas
-$notes = getAllNotes();
+$n = new Notes();
+$notes = $n->getAllNotes();
 
 ?>
 
@@ -34,7 +37,10 @@ $notes = getAllNotes();
                                                 data-bs-toggle="modal" data-bs-target="#deleteNoteModal"
                                                 value="<?php echo $item['id']; ?>"
                                                 onclick="openModalDelete(this.value)">✕</button>
-                                            <button class="btn btn-success btn-sm edit-btn">✎</button>
+                                            <button type="button" class="btn btn-success btn-sm edit-btn"
+                                                data-bs-toggle="modal" data-bs-target="#editNoteModal"
+                                                value="<?php echo $item['id']; ?>" onclick="openModalEdit(this.value)">✎
+                                            </button>
                                         </div>
                                     </li>
                                 <?php endforeach; ?>
@@ -93,26 +99,37 @@ $notes = getAllNotes();
             </div>
         </div>
     </div>
-    <?php
-    //envia requisição para API, retornando todas as notas
-    function getAllNotes()
-    {
-        $curl = curl_init();
-        $url = 'http://localhost/b7web/php/modulo9/DevsNotes/api/getall.php';
 
-        curl_setopt($curl, CURLOPT_URL, $url);
-        curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
-
-        $response = curl_exec($curl);
-
-        curl_close($curl);
-
-        //transformando retorno JSON em um array (utilizar o 'true' para ser array)
-        $data = json_decode($response, true);
-
-        return $data;
-    }
-
-    ?>
+    <!--Modal editar nota-->
+    <div class="modal fade" id="editNoteModal" tabindex="-1" aria-labelledby="editNoteModalLabel" aria-hidden="true">
+        <input type="hidden" id="noteIdEdit">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="editNoteModalLabel">
+                        Editar Nota
+                    </h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="mb-3">
+                        <label for="noteTitleEdit" class="form-label">Título</label>
+                        <input type="text" class="form-control" id="noteTitleEdit" name="noteTitleEdit" >
+                    </div>
+                    <div class="mb-3">
+                        <label for="noteBodyEdit" class="form-label">Conteúdo</label>
+                        <textarea class="form-control" id="noteBodyEdit" rows="4" name="noteBodyEdit" ></textarea>
+                    </div>
+                    <div class="mb-3">
+                        <p class="errorEdit"></p>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" id="btnConfirmEditNote" class="btn btn-success">Salvar</button>
+                    <button type="submit" class="btn btn-danger" data-bs-dismiss="modal">Cancelar</button>
+                </div>
+            </div>
+        </div>
+    </div>
 
     <?php require 'footer.php'; ?>
