@@ -64,7 +64,36 @@ $('#btnConfirmEditNote').click(function () {
         }, 4000);
     }
     else {
-        alert('Okay');
+        const url = 'http://localhost/b7web/php/modulo9/DevsNotes/api/update.php';
+        const data = {
+            id: noteId,
+            title: noteTitle,
+            body: noteBody
+        };
+
+        const urlEnocodedData = new URLSearchParams(data).toString();
+
+        fetch(url, {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded'
+            },
+            body: urlEnocodedData
+        })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Erro na requisição');
+                }
+                return response.json();
+            })
+            .then(data => {
+                console.log('Sucesso:', data);
+                window.location.href = 'http://localhost/b7web/php/modulo9/DevsNotes';
+            })
+            .catch(error => {
+                console.error('Erro:', error);
+            });
+
     }
 
 
