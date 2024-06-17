@@ -48,6 +48,52 @@ function openModalEdit(noteId) {
     });
 }
 
+$('#formInsertNote').submit(function (e) {
+    e.preventDefault();
+    let noteTitle = $('#noteTitle').val();
+    let noteBody = $('#noteBody').val();
+    let errInsert = $('.errorInsert');
+
+    if (noteTitle == '' || noteBody == '') {
+        errInsert.html('Por favor preencha todos os campos!').fadeIn();
+
+        setTimeout(function () {
+            errInsert.fadeOut();
+        }, 4000);
+    }
+
+    else {
+        const url = 'http://localhost/b7web/php/modulo9/DevsNotes/api/insert.php';
+        const data = {
+            noteTitle: noteTitle,
+            noteBody: noteBody
+        };
+
+        const urlEnocodedData = new URLSearchParams(data).toString();
+
+        fetch(url, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded'
+            },
+            body: urlEnocodedData
+        })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Erro na requisição');
+                }
+                return response.json();
+            })
+            .then(data => {
+                console.log('Sucesso:', data);
+                window.location.href = 'http://localhost/b7web/php/modulo9/DevsNotes';
+            })
+            .catch(error => {
+                console.error('Erro:', error);
+            });
+    }
+})
+
 //valida campos de edição e envia requisição para update
 $('#btnConfirmEditNote').click(function () {
     let noteId = $('#noteIdEdit').val();

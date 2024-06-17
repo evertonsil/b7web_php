@@ -53,7 +53,7 @@ $notes = $n->getAllNotes();
             </div>
         </div>
     </div>
-    <form method="POST" action="api/insert.php">
+    <form method="POST" id="formInsertNote">
         <div class="modal fade" id="insertNoteModal" tabindex="-1" aria-labelledby="exampleModalLabel"
             aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered">
@@ -71,6 +71,9 @@ $notes = $n->getAllNotes();
                             <label for="noteBody" class="form-label">Conteúdo</label>
                             <textarea class="form-control" id="noteBody" rows="4" name="noteBody" required></textarea>
                         </div>
+                        <div class="mb-3">
+                        <p class="errorInsert"></p>
+                    </div>
                     </div>
                     <div class="modal-footer">
                         <button type="submit" class="btn btn-success">Cadastrar</button>
