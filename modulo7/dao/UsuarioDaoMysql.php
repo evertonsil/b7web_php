@@ -1,10 +1,13 @@
 <?php
 require_once 'models/Usuario.php';
 
+/*essa classe trata os dados com o MySQL, 
+caso necessário pode-se criar outra classe para tratar com outro SGBD*/
 class UsuarioDaoMysql implements UsuarioDAO
 {
     private $pdo;
 
+    //importanto o driver do PDO
     public function __construct(PDO $driver)
     {
         $this->pdo = $driver;

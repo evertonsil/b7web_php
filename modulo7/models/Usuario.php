@@ -1,32 +1,43 @@
 <?php
-class Usuario {
+class Usuario
+{
     private $id;
     private $nome;
     private $email;
 
-    public function getId() {
+    public function getId()
+    {
         return $this->id;
     }
-    public function setId($i) {
+    public function setId($i)
+    {
+        //remove espaços em branco
         $this->id = trim($i);
     }
 
-    public function getNome() {
+    public function getNome()
+    {
         return $this->nome;
     }
-    public function setNome($n) {
+    public function setNome($n)
+    {
+        //define o nome em capitalize (letras maiusculas)
         $this->nome = ucwords(trim($n));
     }
 
-    public function getEmail() {
+    public function getEmail()
+    {
         return $this->email;
     }
-    public function setEmail($e) {
+    public function setEmail($e)
+    {
         $this->email = strtolower(trim($e));
     }
 }
 
-interface UsuarioDAO {
+//interface para definir o modelo da classe UsuarioDAO
+interface UsuarioDAO
+{
     public function add(Usuario $u);
     public function findAll();
     public function findByEmail($email);
